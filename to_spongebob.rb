@@ -26,7 +26,7 @@ def spongify(body)
 end
 
 def sponge_it
-  customer_latest_tweet = CLIENT.user_timeline(CUSTOMER).first
+  customer_latest_tweet = CLIENT.user_timeline(CUSTOMER, tweet_mode: 'extended').first
   our_latest_tweet      = CLIENT.user_timeline(COMPANY).first
 
   # This doesn't work if COMPANY has no tweets
@@ -34,7 +34,8 @@ def sponge_it
   # This also doesn't take into account if the CUSTOMER
   # tweets more than once between when this code is run
   if our_latest_tweet.in_reply_to_status_id != customer_latest_tweet.id
-    CLIENT.update(spongify(customer_latest_tweet.full_text),
+    body = customer_latest_tweet.attrs[:full_text]
+    CLIENT.update(spongify(body),
                   in_reply_to_status_id: customer_latest_tweet.id)
   end
 end
