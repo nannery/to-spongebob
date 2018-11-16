@@ -34,7 +34,7 @@ def sponge_it
   # This also doesn't take into account if the CUSTOMER
   # tweets more than once between when this code is run
   if our_latest_tweet.in_reply_to_status_id != customer_latest_tweet.id
-    CLIENT.update(spongify(customer_latest_tweet.body),
+    CLIENT.update(spongify(customer_latest_tweet.text),
                   in_reply_to_status_id: customer_latest_tweet.id)
   end
 end
