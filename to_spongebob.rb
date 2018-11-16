@@ -20,7 +20,7 @@ COMMENT_PREFIX = "@#{CUSTOMER} "
 def spongify(body)
   sponged_body = body.each_char
                      .with_object(String.new) do |char, new_body|
-    new_body << c.public_send(rand(0..1).zero? ? :upcase : :downcase)
+    new_body << char.public_send(rand(0..1).zero? ? :upcase : :downcase)
   end
   COMMENT_PREFIX + sponged_body
 end
